@@ -24,7 +24,7 @@ export default function ProductListWithFetchingState({
   )
 }
 
-function ProductList({ data }: { data: Product[] }) {
+export function ProductList({ data }: { data: Product[] }) {
   return (
     <div className="flex w-full flex-col md:col-span-4 lg:col-span-4">
       <h2 className={`mb-4 text-xl md:text-2xl`}>Product List</h2>
