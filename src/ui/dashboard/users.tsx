@@ -1,20 +1,27 @@
 import clsx from 'clsx'
 import { useUsers } from '@/dashboard/hooks/useUsers'
-import { UsersSkeleton } from '@/ui/skeletons'
-export default function Users() {
+import { User } from 'types'
+import { withFetchingState } from '@/libs/withFetchingState'
+
+export default function UsersWithFetchingState() {
   const { users, isLoading, error } = useUsers()
-  if (isLoading) {
-    return <UsersSkeleton />
-  }
-  if (error) {
-    return <div>Error: {error.message}</div>
-  }
+  const UsersWithFetchingState = withFetchingState<{ data: User[] }>(Users)
+  return (
+    <UsersWithFetchingState
+      isLoading={isLoading}
+      error={error}
+      whichSkelton="list"
+      data={{ data: users }}
+    />
+  )
+}
+function Users({ data }: { data: User[] }) {
   return (
     <div className="flex w-full flex-col md:col-span-4 lg:col-span-4">
       <h2 className={`mb-4 text-xl md:text-2xl`}>Users</h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
         <div className="bg-white px-6">
-          {users.map((user, i) => {
+          {data.map((user, i) => {
             return (
               <div
                 key={user.id}
