@@ -1,5 +1,5 @@
 import { Product } from 'types'
-import { Card } from '../card'
+import { CardWithHover } from '../card'
 import { withFetchingState } from '@/libs/withFetchingState'
 
 export default function ProductGalleryWithFetchingState({
@@ -30,7 +30,7 @@ export function ProductGallery({ data }: { data: Product[] }) {
       <h2 className={`mb-4 text-xl md:text-2xl`}>Product Gallery</h2>
       <div className="grid grid-cols-3 gap-5">
         {data.map((product) => (
-          <Card product={product} />
+          <CardWithHover data={{ data: product }} />
         ))}
       </div>
     </div>

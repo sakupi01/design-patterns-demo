@@ -1,7 +1,7 @@
 import { useProducts } from '@/dashboard/hooks/useProducts'
 import type { Product } from 'types'
 import { withFetchingState } from '@/libs/withFetchingState'
-import { Card } from '../card'
+import { CardWithHover } from '../card'
 
 export default function CardWrapperWithFetchingState() {
   const { products, isLoading, error } = useProducts()
@@ -23,7 +23,7 @@ function CardWrapper({ data }: { data: Product[] }) {
       <h2 className={`mb-4 text-xl md:text-2xl`}>Product Gallery</h2>
       <div className="flex gap-4 py-4 overflow-x-auto overflow-y-hidden">
         {data.map((product) => (
-          <Card product={product} />
+          <CardWithHover data={{ data: product }} />
         ))}
       </div>
     </div>
