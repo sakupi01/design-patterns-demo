@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import Dashboard from './dashboard'
-import Layout from './dashboard/layout'
+import ProductListContainer from './product-list/container'
+import Layout from './layout'
+import ProductGalleryContainer from './product-gallery/container'
 
 const router = createBrowserRouter([
   {
@@ -11,6 +13,22 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Dashboard />
+      </Layout>
+    ),
+  },
+  {
+    path: '/product-list',
+    element: (
+      <Layout>
+        <ProductListContainer />
+      </Layout>
+    ),
+  },
+  {
+    path: '/product-gallery',
+    element: (
+      <Layout>
+        <ProductGalleryContainer />
       </Layout>
     ),
   },
