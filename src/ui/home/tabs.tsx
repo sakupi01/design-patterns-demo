@@ -1,34 +1,8 @@
-import { assertNonNullable } from '@/libs/assert'
 import clsx from 'clsx'
-// import NavLinks from '@/ui/home/nav-links'
-import {
-  Children,
-  cloneElement,
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from 'react'
 
-type TabsContextType = {
-  properties?: {
-    activeTab: number
-    onChange: (index: number) => void
-  }
-}
-const TabsContext = createContext<TabsContextType>({})
-
-const useTabsContext = () => {
-  const context = useContext(TabsContext)
-  if (!context) {
-    throw new Error(
-      `Tabs compound components cannot be rendered outside the Tabs component`
-    )
-  }
-  assertNonNullable(context.properties)
-  return context.properties
-}
+import { Children, cloneElement, useCallback, useMemo, useState } from 'react'
+import { useTabsContext } from './hooks/useTabxContext'
+import { TabsContext, TabsContextType } from './utils/tabsContext'
 
 function TabList({ children }: { children: React.ReactNode }) {
   const { activeTab, onChange } = useTabsContext()
