@@ -1,14 +1,6 @@
 import { ComponentType, useState } from 'react'
 
-// Define a Higher Order Component (HOC) that adds hovering functionality
 export function withHover<P>(Component: ComponentType<P>) {
-  // Define the props for the HOC
-  // type HocProps = {
-  //   hovering: boolean
-  //   handleHover: (isHovering: boolean) => void
-  // }
-
-  // Create a new component with hovering functionality(hovering, handleHover)
   return ({ data }: { data: P }) => {
     const [hovering, setHovering] = useState(false)
 

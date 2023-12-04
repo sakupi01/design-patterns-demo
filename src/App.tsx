@@ -24,7 +24,7 @@ export default function App() {
       <Tabs.TabList>
         {tabs.map((tab) => {
           return (
-            <Tabs.Tab key={tab.id}>
+            <Tabs.Tab key={tab.id} index={tab.id}>
               {tab.icon}
               <p className="hidden md:block">{tab.name}</p>
             </Tabs.Tab>

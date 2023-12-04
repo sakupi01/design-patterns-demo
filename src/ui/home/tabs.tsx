@@ -1,46 +1,40 @@
 import clsx from 'clsx'
 
-import { Children, cloneElement, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useTabsContext } from './hooks/useTabxContext'
-import { TabsContext, TabsContextType } from './utils/tabsContext'
+import { TabsContext } from './utils/tabsContext'
 
 function TabList({ children }: { children: React.ReactNode }) {
-  const { activeTab, onChange } = useTabsContext()
   return (
     <div className="flex w-full py-4 md:pt-5">
-      <div className="flex gap-4">
-        {Children.map(children, (child, index) => {
-          return cloneElement(child as React.ReactElement, {
-            isActive: activeTab === index,
-            onClick: () => onChange(index),
-          })
-        })}
-      </div>
+      <div className="flex gap-4">{children}</div>
     </div>
   )
 }
 
 const Tab = ({
   children,
-  isActive,
-  onClick,
+  index,
 }: {
   children: React.ReactNode
-  isActive?: boolean
-  onClick?: () => NonNullable<TabsContextType['properties']>['onChange']
-}) => (
-  <div
-    onClick={onClick}
-    className={clsx(
-      `flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-purple-100 hover:text-yellow-500 md:flex-none md:justify-start md:p-2 md:px-3`,
-      {
-        'bg-purple-100 text-yellow-500': isActive,
-      }
-    )}
-  >
-    {children}
-  </div>
-)
+  index: number
+}) => {
+  const { activeTab, onChange } = useTabsContext()
+  const isActive = useMemo(() => activeTab === index, [activeTab, index])
+  return (
+    <div
+      onClick={() => onChange(index)}
+      className={clsx(
+        `flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-purple-100 hover:text-yellow-500 md:flex-none md:justify-start md:p-2 md:px-3`,
+        {
+          'bg-purple-100 text-yellow-500': isActive,
+        }
+      )}
+    >
+      {children}
+    </div>
+  )
+}
 
 function TabDisplay({ children }: { children: React.ReactNode }) {
   return <div className="flex flex-col gap-4">{children}</div>

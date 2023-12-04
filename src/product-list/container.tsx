@@ -4,7 +4,7 @@ import ProductListWithFetchingState from '@/ui/product-list/list'
 export default function ProductListContainer() {
   const { products, isLoading, error } = useProducts()
 
-  // Only UI implementation
+  // 👇UI implementation only
   return (
     <main className="flex flex-col gap-5">
       <ProductListWithFetchingState
